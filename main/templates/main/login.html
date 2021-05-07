@@ -1,0 +1,16 @@
+{%extends "main/header.html" %}
+
+
+{%block content%}
+
+this is login page
+
+<form method="POST">
+    {% csrf_token %}
+
+
+    {{form}}
+</form>
+
+
+{%endblock%}

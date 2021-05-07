@@ -1,0 +1,28 @@
+{%extends "main/header.html" %}
+
+
+{%block content%}
+
+<h1 class="center-align">Welcome to the listing with id {{listing_id}}! </h1>
+<br>
+<br>
+<div class="center-align">
+    <img class="responsive-img" src="{{MEDIA_URL}}main/{{url}}" alt="Photo will be here">
+</div>
+<br>
+
+<ul class="collection with-header ">
+    <li class="collection-header grey lighten-3"><h4>{{brand}}</h4></li>
+    <li class="collection-item">Category: {{category}}</li>
+    <li class="collection-item">Year of production: {{year_made}}</li>
+    <li class="collection-item">Seller description: {{description}} </li>
+    <li class="collection-item">What did our expert say?: {{luthier_description}} </li>
+    <li class="collection-item">Price: {{price}}</li>
+  </ul>
+
+<div class="center-align">
+    <a class="waves-effect waves-light btn-large grey lighten-3 black-text" href="/listings">Browse other listings!</a>
+</div>
+<br>
+
+{%endblock %}
