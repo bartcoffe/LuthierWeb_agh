@@ -29,6 +29,6 @@ urlpatterns = [
     path('add_listing/', AddListing.as_view()),
 
 
-    path('xd/', views.xd,name="xd"),
+    path('test/', views.test,name="xd"),
     ]
 

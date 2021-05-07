@@ -7,7 +7,7 @@ from .forms import *
 
 
 # Create your views here.
-def xd(request):
+def test(request):
      x = 'BLANK'
      return render(request = request,
                     template_name='main/home.html',
@@ -93,15 +93,18 @@ class AddListing(TemplateView):
                          template_name=self.template_name,
                          context = {'form':form,
                                    'form_pic':form_pic})
-     
+
+
+     #template 'xd' is just for testing if post request went throught
+     #next to do is read docs on saving pics from post requests and uploading post data to databse
+     #also migrate db to sqlite and check if its possible to render project on github pages  
      def post(self,request):
           form = UserListingForm(request.POST)
           form_pic=UserListingPhotoForm(request.FILES)
-          description='xd'
           if form.is_valid():
                description = form.cleaned_data['sellerdescription']
           return render( request = request,
-                         template_name='main/xd.html',
+                         template_name='main/test.html',
                          context = {'form':form,
                                    'form_pic':form_pic,
                                    'description': description})
