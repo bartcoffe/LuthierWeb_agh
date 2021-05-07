@@ -27,5 +27,8 @@ urlpatterns = [
     path('listing_page/<listing_id>', views.listing_page,name="listing_page"),
     #path('add_listing/', views.add_listing,name="add_listing"),
     path('add_listing/', AddListing.as_view()),
+
+
+    path('xd/', views.xd,name="xd"),
     ]
 

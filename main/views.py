@@ -7,6 +7,13 @@ from .forms import *
 
 
 # Create your views here.
+def xd(request):
+     x = 'BLANK'
+     return render(request = request,
+                    template_name='main/home.html',
+                    context = {'x':x})
+
+
 def home(request):
      x = 'BLANK'
      return render(request = request,
@@ -90,10 +97,11 @@ class AddListing(TemplateView):
      def post(self,request):
           form = UserListingForm(request.POST)
           form_pic=UserListingPhotoForm(request.FILES)
-          if (form.is_valid() and form_pic.is_valid()):
-               text = form.cleaned_data['sellerdescription']
-
+          description='xd'
+          if form.is_valid():
+               description = form.cleaned_data['sellerdescription']
           return render( request = request,
-                         template_name=self.template_name,
+                         template_name='main/xd.html',
                          context = {'form':form,
-                                   'form_pic':form_pic})
+                                   'form_pic':form_pic,
+                                   'description': description})
