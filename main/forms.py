@@ -9,5 +9,5 @@ class UserListingForm(ModelForm):
         fields = ['proposedprice','guitarbrandid','sellerdescription','categoryid','guitarbrandid','yearguitarproduced','noowners']
 
 
-class UserListingPhotoForm(forms.Form):
-    img=forms.ImageField()
+# class UserListingPhotoForm(forms.Form):
+#     img=forms.ImageField()

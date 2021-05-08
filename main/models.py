@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.utils.timezone import now
 
 
 class Categories(models.Model):
@@ -34,7 +35,7 @@ class City(models.Model):
         return self.placename
 
     class Meta:
-        managed = False
+       
         db_table = 'City'
         verbose_name_plural ='City'
 
@@ -47,7 +48,7 @@ class Guitarbrand(models.Model):
         return self.name
   
     class Meta:
-        managed = False
+        
         db_table = 'GuitarBrand'
         verbose_name_plural ='Guitar Brand'
 
@@ -65,7 +66,7 @@ class Listingstatushistory(models.Model):
 
 
     class Meta:
-        managed = False
+        
         db_table = 'ListingStatusHistory'
         verbose_name_plural ='Listing Status History'
 
@@ -83,7 +84,7 @@ class Luthierinteractionshist(models.Model):
 
 
     class Meta:
-        managed = False
+        
         db_table = 'LuthierInteractionsHist'
         verbose_name_plural ='Luthier Interactions History'
 
@@ -105,7 +106,7 @@ class Luthierservice(models.Model):
 
 
     class Meta:
-        managed = False
+        
         db_table = 'LuthierService'
         verbose_name_plural ='Luthier Service'
 
@@ -117,7 +118,7 @@ class Productstatusresponses(models.Model):
         return self.statusname
 
     class Meta:
-        managed = False
+        
         db_table = 'ProductStatusResponses'
         verbose_name_plural ='Product Status Responses'
 
@@ -125,10 +126,10 @@ class Userlisting(models.Model):
     listingid = models.AutoField(db_column='ListingID', primary_key=True)  # Field name made lowercase.
     proposedprice = models.DecimalField(db_column='ProposedPrice', max_digits=19, decimal_places=4)  # Field name made lowercase.
     sellerdescription = models.TextField(db_column='SellerDescription')  # Field name made lowercase. This field type is a guess.
-    productstatusid = models.ForeignKey(Productstatusresponses, models.DO_NOTHING, db_column='ProductStatusID')  # Field name made lowercase.
+    productstatusid = models.ForeignKey(Productstatusresponses, models.DO_NOTHING, db_column='ProductStatusID', default=0)  # Field name made lowercase.
     sellerid = models.ForeignKey('Users', models.DO_NOTHING, db_column='SellerID', blank=True, null=True)  # Field name made lowercase.
     categoryid = models.ForeignKey(Categories, models.DO_NOTHING, db_column='CategoryID')  # Field name made lowercase.
-    listingdate = models.DateField(db_column='ListingDate')  # Field name made lowercase.
+    listingdate = models.DateField(db_column='ListingDate', default = now)  # Field name made lowercase.
     luthierid = models.ForeignKey('Users', models.DO_NOTHING,related_name='ULluthierid', db_column='LuthierID', blank=True, null=True)  # Field name made lowercase.
     buyerid = models.ForeignKey('Users', models.DO_NOTHING,related_name='ULbuyerid', db_column='BuyerID', blank=True, null=True)  # Field name made lowercase.
     guitarbrandid = models.ForeignKey(Guitarbrand, models.DO_NOTHING, db_column='GuitarBrandID')  # Field name made lowercase.
@@ -144,7 +145,7 @@ class Userlisting(models.Model):
         verbose_name_plural ='User Listing'
 
 class Listingpictureurl(models.Model):
-    listingid = models.ForeignKey('Userlisting', models.DO_NOTHING, db_column='ListingID')  # Field name made lowercase.
+    listingid = models.ForeignKey('Userlisting', models.CASCADE, db_column='ListingID')  # Field name made lowercase.
     pictureurl = models.CharField(db_column='pictureURL', max_length=150)  # Field name made lowercase.
     
     def __str__(self):
@@ -152,7 +153,7 @@ class Listingpictureurl(models.Model):
 
     
     class Meta:
-        managed = False
+        
         db_table = 'ListingPictureURL'
         verbose_name_plural ='Listing Picture URL'
 
@@ -164,7 +165,7 @@ class Userrole(models.Model):
         return self.rolename
 
     class Meta:
-        managed = False
+        
         db_table = 'UserRole'
         verbose_name_plural ='User Role'
 
@@ -183,7 +184,7 @@ class Users(models.Model):
         return username
 
     class Meta:
-        managed = False
+        
         db_table = 'Users'
         verbose_name_plural ='Users'
 

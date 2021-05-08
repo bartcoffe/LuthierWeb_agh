@@ -4,7 +4,7 @@ from .models import Userlisting, Listingpictureurl
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from .forms import * 
-
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 def test(request):
@@ -88,23 +88,50 @@ class AddListing(TemplateView):
      
      def get(self,request):
           form=UserListingForm()
-          form_pic=UserListingPhotoForm()
+          # form_pic=UserListingPhotoForm()
+          form_pic='xd'
           return render( request = request,
                          template_name=self.template_name,
                          context = {'form':form,
                                    'form_pic':form_pic})
 
 
-     #template 'xd' is just for testing if post request went throught
+     #template 'test' is just for testing if post request went through
      #next to do is read docs on saving pics from post requests and uploading post data to databse
      #also migrate db to sqlite and check if its possible to render project on github pages  
      def post(self,request):
           form = UserListingForm(request.POST)
-          form_pic=UserListingPhotoForm(request.FILES)
+          # form_pic=UserListingPhotoForm(request.POST, request.FILES)
           if form.is_valid():
-               description = form.cleaned_data['sellerdescription']
+               saved_form = form.save()
+               proposedprice = form.cleaned_data['proposedprice']
+               guitarbrandid = form.cleaned_data['guitarbrandid']
+               sellerdescription = form.cleaned_data['sellerdescription']
+               categoryid = form.cleaned_data['categoryid']
+               guitarbrandid = form.cleaned_data['guitarbrandid']
+               yearguitarproduced = form.cleaned_data['yearguitarproduced']
+               noowners = form.cleaned_data['noowners']
+
+          # saved_form.refresh_from_db()
+          #handling uploaded imgs
+          img = request.FILES['img']
+          stored_img= FileSystemStorage(location='media/main')
+          name = stored_img.save(img.name, img)
+          url = stored_img.url(name)
+          form_pk = saved_form.pk #get the listing_id so img matches descriptions
+          new_photo_row = Listingpictureurl(listingid=Userlisting.objects.latest('listingid'), pictureurl=str(name))
+          new_photo_row.save()
+
+          context= {
+               'proposedprice':proposedprice,
+               'guitarbrandid':guitarbrandid,
+               'sellerdescription':sellerdescription,
+               'categoryid':categoryid,
+               'guitarbrandid':guitarbrandid,
+               'yearguitarproduced':yearguitarproduced,
+               'noowners':noowners,
+               'url':url
+          }
           return render( request = request,
                          template_name='main/test.html',
-                         context = {'form':form,
-                                   'form_pic':form_pic,
-                                   'description': description})
+                         context = context)

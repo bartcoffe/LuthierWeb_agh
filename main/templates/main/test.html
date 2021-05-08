@@ -2,5 +2,24 @@
 
 
 {%block content%}
-   {{description}}
+   
+<p>1: {{proposedprice}}</p>
+<p>2: {{guitarbrandid}}</p>
+<p>3:{{sellerdescription}}</p>
+<p>4: {{categoryid}}</p>
+<p>5: {{guitarbrandid}}</p>
+<p>6: {{yearguitarproduced}}</p>
+<p>7: {{noowners}}</p>
+
+  <br>
+  
+  {% if url %}
+  <p>Succesfully uploaded to: {{url}}</p>
+  <!-- <img src="{{ url }}" alt="xd" style="max-height:300px"> -->
+{% endif %}
+<br>
+<br>
+<a class="waves-effect waves-light btn-large grey lighten-3 black-text" href="/">Come Home</a>
+<br>
+<br>
 {%endblock%}

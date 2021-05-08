@@ -6,11 +6,12 @@
 <h1 class="center-align">Add your listing! </h1>
 <br>
 <br>
-    <form  method="post">
+    <form  method="post"  enctype="multipart/form-data">
         {%csrf_token%}
         {{form.as_p}}
-        {{form_pic.as_p}}
-        <button type="submit">Submit form</button>
+        <!-- {{form_pic.as_p}} -->
+        <input type="file" name="img">
+        <button type="submit">Submit</button>
     </form>
 </div>
 <br>
@@ -19,4 +20,6 @@
     <a class="waves-effect waves-light btn-large grey lighten-3 black-text" href="/">Come Home</a>
 </div>
 <br>
+
+
 {%endblock%}
