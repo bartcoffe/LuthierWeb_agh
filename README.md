@@ -12,6 +12,8 @@ Zaimplementowane zostały fragmenty aplikacji umożliwiające przeglądanie ofer
 
 
 Screenshots:
+![](schema db.pdf)
+
 ![](screenshots/127.0.0.1_8000_add_listing_.png)
 
 
