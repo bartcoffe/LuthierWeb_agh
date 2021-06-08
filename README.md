@@ -16,6 +16,12 @@ Dodatkowo, framework Django udostępnia funkcjonalność panelu administracyjneg
 
 
 Screenshots:
+
+graphic project showing app idea:
+
+![](screenshots/LuthierWebFront.png)
+
+
 database schema:
 
 
