@@ -17,7 +17,7 @@ Screenshots:
 database schema:
 
 
-![](screenshots/schema db-1.png)
+![](screenshots/schema_db.png)
 
 app screens:
 
