@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'sql_server.pyodbc',
         'NAME': 'u_bkawa',
         'USER': 'bkawa',
-        'PASSWORD': 'programming1234',
+        'PASSWORD': 'programming12345',
         'HOST': 'DESKTOP-E95KR7F',
         'PORT': '',
 

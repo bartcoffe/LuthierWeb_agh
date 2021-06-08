@@ -30,5 +30,6 @@ urlpatterns = [
 
 
     path('test/', views.test,name="xd"),
+    path('sold/<listing_id>', views.sold,name="sold"),
     ]
 

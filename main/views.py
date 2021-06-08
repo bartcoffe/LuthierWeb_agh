@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from .forms import * 
 from django.core.files.storage import FileSystemStorage
+from django.db import connection
 
 # Create your views here.
 def test(request):
@@ -35,9 +36,11 @@ def listings(request):
      pic_dict={}
      for pic in Listingpictureurl.objects.all():
          pic_dict.update({pic.listingid.pk:pic.pictureurl})
+
+     accepted_listings=Userlisting.objects.filter(productstatusid=1)
      return render(request = request,
                  template_name='main/listings.html',
-                 context = {"listings":Userlisting.objects.all(),
+                 context = {"listings":accepted_listings,
                              "listing_pictures":pic_dict
                              })
 
@@ -97,8 +100,6 @@ class AddListing(TemplateView):
 
 
      #template 'test' is just for testing if post request went through
-     #next to do is read docs on saving pics from post requests and uploading post data to databse
-     #also migrate db to sqlite and check if its possible to render project on github pages  
      def post(self,request):
           form = UserListingForm(request.POST)
           # form_pic=UserListingPhotoForm(request.POST, request.FILES)
@@ -135,3 +136,19 @@ class AddListing(TemplateView):
           return render( request = request,
                          template_name='main/test.html',
                          context = context)
+
+
+def sold(request,listing_id):
+     user_id=1
+     listing_id=int(listing_id)
+     sold=4
+     cursor = connection.cursor()
+     try:
+          cursor.execute('EXEC [dbo].[spChangeListingProductStatus] {}, {}, {}'.format(user_id,listing_id, sold))
+     finally:
+          cursor.close()
+
+
+     return render(request = request,
+                    template_name='main/sold.html',
+                    context = {'x':listing_id})
