@@ -14,6 +14,13 @@ Zaimplementowane zostały fragmenty aplikacji umożliwiające przeglądanie ofer
 
 
 Screenshots:
+database schema:
+
+
+![](screenshots/schema db-1)
+
+app screens:
+
 
 ![](screenshots/127.0.0.1_8000_add_listing_.png)
 
